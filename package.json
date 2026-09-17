@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start",
-    "export": "next build && next export",
+    "start": "python3 -m http.server 3001 --directory out",
     "lint": "next lint"
   },
   "dependencies": {
