@@ -19,7 +19,7 @@ export default function Footer() {
         </Typography>
         <Typography variant="body2">
           <MuiLink
-            href="https://github.com/your-repo"
+            href="https://github.com/kgathuai/Evieit"
             target="_blank"
             rel="noopener noreferrer"
             sx={{ color: '#16a34a', textDecoration: 'none', mr: 2 }}
@@ -28,7 +28,7 @@ export default function Footer() {
           </MuiLink>
           |
           <MuiLink
-            href="https://github.com/your-repo/docs/uni-learn-concept-paper.md"
+            href="https://github.com/kgathuai/Evieit/docs/uni-learn-concept-paper.md"
             target="_blank"
             rel="noopener noreferrer"
             sx={{ color: '#16a34a', textDecoration: 'none', ml: 2 }}

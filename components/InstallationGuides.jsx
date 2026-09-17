@@ -24,7 +24,7 @@ const installationGuides = [
         description: 'Find "Uni-Learn" in your Apps and open it',
       },
     ],
-    docsLink: 'https://github.com/your-repo/tizen/README.md',
+    docsLink: 'https://github.com/kgathuai/Evieit/tizen/README.md',
   },
   {
     id: 'webos',
@@ -47,7 +47,7 @@ const installationGuides = [
         description: 'Launch "Uni-Learn" from your apps menu',
       },
     ],
-    docsLink: 'https://github.com/your-repo/webos/README.md',
+    docsLink: 'https://github.com/kgathuai/Evieit/webos/README.md',
   },
   {
     id: 'android',
@@ -70,7 +70,7 @@ const installationGuides = [
         description: 'Find "Uni-Learn" in your Apps list',
       },
     ],
-    docsLink: 'https://github.com/your-repo/android-tv/README.md',
+    docsLink: 'https://github.com/kgathuai/Evieit/android-tv/README.md',
   },
   {
     id: 'hdmi',
@@ -93,7 +93,7 @@ const installationGuides = [
         description: 'App starts automatically on boot',
       },
     ],
-    docsLink: 'https://github.com/your-repo/pi-kiosk/README.md',
+    docsLink: 'https://github.com/kgathuai/Evieit/pi-kiosk/README.md',
   },
 ];
 

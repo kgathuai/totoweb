@@ -17,7 +17,7 @@ A Next.js + Material-UI landing website where people can download and access Uni
 ## Project Structure
 
 ```
-website/
+totoweb/
 ├── app/
 │   ├── layout.jsx          # Root layout with theme provider
 │   └── page.jsx            # Landing page
@@ -40,7 +40,7 @@ website/
 ### 1. Install Dependencies
 
 ```bash
-cd website
+cd totoweb
 npm install
 ```
 
@@ -56,42 +56,53 @@ Then open http://localhost:3001 in your browser.
 
 ```bash
 npm run build
+```
+
+Because the project uses `output: 'export'`, this produces a completely static site in `out/` that can be deployed to any static host.
+
+To preview the exported site locally:
+
+```bash
 npm start
 ```
 
-Or export as static site:
-
-```bash
-npm run export
-```
-
-This creates an `out/` folder that can be deployed to any static host.
-
-### 2. Deploy to the Web
+### 4. Deploy to the Web
 
 Choose one of these free hosting options:
 
 #### Option A: Netlify (Easiest)
 
-1. Sign up at [netlify.com](https://netlify.com)
-2. Drag and drop the `website` folder
-3. Done! Your site is live
+The repo ships a `netlify.toml`, so no manual build settings are needed.
+
+Git-connected (auto-deploys on every push):
+
+1. Push this repository to GitHub
+2. Sign up at [netlify.com](https://netlify.com) and choose **Add new site -> Import an existing project**
+3. Pick the repository — Netlify reads `netlify.toml` (build `npm run build`, publish `out`)
+4. Deploy
+
+Or deploy the already-built folder straight from your machine:
+
+```bash
+npm run build
+npx netlify-cli deploy --prod --dir=out
+```
 
 #### Option B: GitHub Pages
 
-1. Push `website` folder to GitHub
-2. In repository settings, enable GitHub Pages
-3. Point to `website` folder
-4. Your site will be at `https://username.github.io/repo/website`
+1. Push this repository to GitHub
+2. Run `npm run build` to generate the `out/` folder
+3. In repository settings, enable GitHub Pages and publish the `out/` folder
+4. Your site will be at `https://username.github.io/totoweb`
 
 #### Option C: Vercel
 
 1. Sign up at [vercel.com](https://vercel.com)
 2. Import your GitHub repo
-3. Set root directory to `website`
+3. Set root directory to `totoweb`
 4. Deploy
 
-### 4. Update Download Links
+### 5. Update Download Links
 
 Edit the downloads in `components/DownloadSection.jsx`:
 
@@ -99,18 +110,18 @@ Edit the downloads in `components/DownloadSection.jsx`:
 const downloads = [
   {
     label: '📥 Samsung Tizen (.wgt)',
-    href: 'https://github.com/your-repo/releases/download/v1.0/UniLearnUSB-signed.wgt',
+    href: '/downloads/UniLearnUSB-unsigned.wgt',
   },
   // ... more downloads
 ];
 ```
 
-### 5. Update Installation Guides
+### 6. Update Installation Guides
 
 Edit the guides in `components/InstallationGuides.jsx` to point to your actual GitHub documentation:
 
 ```jsx
-docsLink: 'https://github.com/your-repo/tizen/README.md',
+docsLink: 'https://github.com/kgathuai/Evieit/tizen/README.md',
 ```
 
 ## Customization
@@ -223,21 +234,31 @@ Example:
 
 ### Netlify
 
-1. Connect your GitHub repo
-2. Set build command: `npm run build`
-3. Set publish directory: `out`
-4. Deploy
+Deployment is preconfigured in `netlify.toml`:
+
+- Build command: `npm run build`
+- Publish directory: `out`
+- Node version: `20`
+
+This site is a Next.js **static export** (`output: 'export'`), so Netlify serves the
+generated files directly — the Next.js Runtime / OpenNext adapter is not required.
+
+Two ways to deploy:
+
+1. **Git-connected:** connect the repository in the Netlify dashboard and every push
+   to `main` redeploys automatically.
+2. **From the CLI:** `npm run build && npx netlify-cli deploy --prod --dir=out`
 
 ### Vercel
 
 1. Import your GitHub repo
-2. Set root directory: `website`
+2. Set root directory: `totoweb`
 3. Auto-deploy on push
 
 ### Any Static Host
 
 ```bash
-npm run export
+npm run build
 # Upload the `out/` folder to any static host
 ```
 
@@ -245,12 +266,11 @@ npm run export
 
 ```bash
 npm run dev      # Start development server (port 3001)
-npm run build    # Build for production
-npm start        # Start production server
-npm run export   # Export as static site
+npm run build    # Build the static site into out/
+npm start        # Preview the built out/ folder (port 3001)
 npm run lint     # Run ESLint
 ```
 
 ## Questions?
 
-See [../DEPLOYMENT.md](../DEPLOYMENT.md) for platform-specific app deployment details.
+See [../totoLearn/DEPLOYMENT.md](../totoLearn/DEPLOYMENT.md) for platform-specific app deployment details.

@@ -6,19 +6,19 @@ export default function DownloadSection() {
   const downloads = [
     {
       label: '📥 Samsung Tizen (.wgt)',
-      href: 'https://github.com/your-repo/releases/download/v1.0/UniLearnUSB-signed.wgt',
+      href: '/downloads/UniLearnUSB-unsigned.wgt',
     },
     {
-      label: '📥 LG webOS (.ipk)',
-      href: 'https://github.com/your-repo/releases/download/v1.0/com.example.unilearn.ipk',
+      label: '🧰 LG webOS — build guide',
+      href: 'https://github.com/kgathuai/Evieit/blob/main/webos/README.md',
     },
     {
-      label: '📥 Android TV (.apk)',
-      href: 'https://github.com/your-repo/releases/download/v1.0/UniLearn.apk',
+      label: '🧰 Android TV — build guide',
+      href: 'https://github.com/kgathuai/Evieit/blob/main/android-tv/README.md',
     },
     {
       label: '💾 View All Files on GitHub',
-      href: 'https://github.com/your-repo',
+      href: 'https://github.com/kgathuai/Evieit',
     },
   ];
 
@@ -65,6 +65,12 @@ export default function DownloadSection() {
             </Grid>
           ))}
         </Grid>
+
+        <Typography variant="body2" sx={{ mt: 3, opacity: 0.9 }}>
+          The Tizen package is unsigned — enable Developer Mode on your TV and sign it
+          with Tizen Studio before installing. The webOS and Android TV packages are not
+          built yet; the guides above walk you through building them from source.
+        </Typography>
       </Container>
     </Box>
   );

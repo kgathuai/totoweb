@@ -1,6 +1,7 @@
 'use client';
 
 import { Box } from '@mui/material';
+import Image from 'next/image';
 
 export default function Header() {
   return (
@@ -13,7 +14,14 @@ export default function Header() {
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'flex-start' }}>
-        <img src="/totologo.png" alt="Uni-Learn Logo" style={{ height: '96px', width: '96px', display: 'block', filter: 'brightness(0) invert(1)' }} />
+        <Image
+          src="/totologo.png"
+          alt="Uni-Learn Logo"
+          width={96}
+          height={96}
+          priority
+          style={{ display: 'block', filter: 'brightness(0) invert(1)' }}
+        />
       </Box>
     </Box>
   );
