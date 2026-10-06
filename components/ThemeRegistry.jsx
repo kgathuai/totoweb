@@ -12,12 +12,16 @@ import { useTvNavigation } from '@/hooks/useTvNavigation';
  * also matches the red TV mark in public/totologo.png.
  */
 export const brand = {
+  // Forest green carries the interface: it signals growth and learning, and it
+  // gives the app's coral screenshots something to sit against.
+  green: { main: '#1f7a4d', dark: '#145c39', light: '#5fb98a', tint: '#e6f4ec' },
+  // Coral is the logo's own red, kept as an accent rather than the base.
   coral: { main: '#ff6b6b', dark: '#e63946', light: '#ffa5a5', tint: '#ffe5e5' },
   yellow: { main: '#ffd93d', dark: '#f2c200', light: '#ffe98a', tint: '#fff4d1' },
   mint: { main: '#6bcf7f', dark: '#3fa055', light: '#a8e6b8', tint: '#e8f5e9' },
   orange: { main: '#ff9f1c', dark: '#e07f00', tint: '#fff3e0' },
   teal: { main: '#4ecdc4', dark: '#2f9e96', tint: '#e0f7f4' },
-  ink: '#2b1114',
+  ink: '#12241a',
 };
 
 const STORAGE_KEY = 'unilearn-color-mode';
@@ -43,33 +47,34 @@ const fluid = (fallback, min, preferred, max) => ({
 function getDesignTokens(mode, tv) {
   const isDark = mode === 'dark';
   const divider = isDark ? 'rgba(255,255,255,0.12)' : 'rgba(43,17,20,0.10)';
-  const focusRing = `4px solid ${brand.coral.dark}`;
+  const focusRing = `4px solid ${brand.green.dark}`;
 
   return {
     palette: {
       mode,
       primary: {
+        main: brand.green.main,
+        dark: brand.green.dark,
+        light: brand.green.light,
+        // White on #1f7a4d measures ~5.3:1, so CTAs pass AA.
+        contrastText: '#ffffff',
+      },
+      secondary: {
         main: brand.coral.main,
         dark: brand.coral.dark,
         light: brand.coral.light,
-        // Dark ink on coral keeps CTA labels at ~6:1; white on coral is only ~3:1.
-        contrastText: brand.ink,
-      },
-      secondary: {
-        main: brand.yellow.main,
-        dark: brand.yellow.dark,
-        light: brand.yellow.light,
+        // Coral is too light for white text; dark ink on it keeps ~6:1.
         contrastText: brand.ink,
       },
       success: { main: brand.mint.main, dark: brand.mint.dark, light: brand.mint.light },
       warning: { main: brand.orange.main, dark: brand.orange.dark },
       info: { main: brand.teal.main, dark: brand.teal.dark },
       background: isDark
-        ? { default: '#171012', paper: '#231719' }
-        : { default: '#fffaf7', paper: '#ffffff' },
+        ? { default: '#0e1a14', paper: '#16261d' }
+        : { default: '#f7faf7', paper: '#ffffff' },
       text: isDark
-        ? { primary: '#f8eeee', secondary: '#cbb4b4' }
-        : { primary: brand.ink, secondary: '#6d5658' },
+        ? { primary: '#eef7f1', secondary: '#a9c2b3' }
+        : { primary: brand.ink, secondary: '#4f6a5b' },
       divider,
     },
     // Sizes below are in rem wherever they affect the UI's scale, so that
@@ -153,17 +158,17 @@ function getDesignTokens(mode, tv) {
           },
           sizeLarge: { padding: '0.9375rem 2rem', minHeight: '3.5rem', fontSize: '1.0625rem' },
           containedPrimary: {
-            backgroundColor: brand.coral.main,
-            color: brand.ink,
-            '&:hover': { backgroundColor: brand.coral.dark, color: '#ffffff' },
+            backgroundColor: brand.green.main,
+            color: '#ffffff',
+            '&:hover': { backgroundColor: brand.green.dark, color: '#ffffff' },
           },
           outlinedPrimary: {
             borderWidth: 2,
-            borderColor: brand.coral.main,
-            color: isDark ? brand.coral.light : brand.coral.dark,
+            borderColor: brand.green.main,
+            color: isDark ? brand.green.light : brand.green.dark,
             '&:hover': {
               borderWidth: 2,
-              backgroundColor: isDark ? 'rgba(255,107,107,0.14)' : brand.coral.tint,
+              backgroundColor: isDark ? 'rgba(31,122,77,0.18)' : brand.green.tint,
             },
           },
         },

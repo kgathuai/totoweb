@@ -5,10 +5,10 @@ import { AppBar, Box, Button, Container, Stack, Toolbar, Typography } from '@mui
 import ColorModeToggle from './ColorModeToggle';
 
 const navItems = [
-  { label: 'Platforms', href: '#platforms' },
+  { label: 'Download', href: '#download' },
+  { label: 'Inside', href: '#inside' },
   { label: 'Install', href: '#install' },
   { label: 'FAQ', href: '#faq' },
-  { label: 'Download', href: '#download' },
 ];
 
 export default function Header() {

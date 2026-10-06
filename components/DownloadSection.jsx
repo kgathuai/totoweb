@@ -49,11 +49,11 @@ export default function DownloadSection() {
           sx={{
             mb: 3,
             border: 'none',
-            background: `linear-gradient(135deg, ${brand.coral.main} 0%, ${brand.yellow.main} 100%)`,
-            color: brand.ink,
+            background: `linear-gradient(135deg, ${brand.green.main} 0%, ${brand.green.dark} 100%)`,
+            color: '#ffffff',
             '&:hover': {
               transform: 'none',
-              boxShadow: '0 26px 55px -26px rgba(43,17,20,0.55)',
+              boxShadow: '0 26px 55px -26px rgba(18,36,26,0.6)',
             },
           }}
         >
@@ -90,9 +90,9 @@ export default function DownloadSection() {
                 download="UniLearnTV.apk"
                 sx={{
                   flexShrink: 0,
-                  bgcolor: brand.ink,
-                  color: '#ffffff',
-                  '&:hover': { bgcolor: '#000000', color: '#ffffff' },
+                  bgcolor: '#ffffff',
+                  color: brand.green.dark,
+                  '&:hover': { bgcolor: '#eef2ef', color: brand.green.dark },
                 }}
               >
                 Download .apk

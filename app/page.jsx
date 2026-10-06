@@ -3,10 +3,11 @@
 import { Box } from '@mui/material';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
+import DownloadSection from '@/components/DownloadSection';
+import WhatsInside from '@/components/WhatsInside';
 import PlatformsSection from '@/components/PlatformsSection';
 import InstallationGuides from '@/components/InstallationGuides';
 import FAQSection from '@/components/FAQSection';
-import DownloadSection from '@/components/DownloadSection';
 import Footer from '@/components/Footer';
 import { useTvMode } from '@/hooks/useTvMode';
 
@@ -27,10 +28,13 @@ export default function Home() {
     >
       <Header />
       <HeroSection />
+      {/* Download sits directly under the hero: most visitors arrive to
+          install it, and it used to be five sections down the page. */}
+      <DownloadSection />
+      <WhatsInside />
       <PlatformsSection />
       <InstallationGuides />
       <FAQSection />
-      <DownloadSection />
       <Footer />
     </Box>
   );

@@ -31,16 +31,6 @@ const faqs = [
     answer:
       'If you already own a TV we support most brands. If you are buying, an Android TV stick is the cheapest route — around $25 — and works with any screen that has an HDMI port.',
   },
-  {
-    question: 'How much space does it need?',
-    answer:
-      'Roughly 50–100 MB. It runs comfortably on older, low-powered TVs and devices.',
-  },
-  {
-    question: 'Can I use it on more than one TV?',
-    answer:
-      'Yes. Install it on each device you want to use, or move a small HDMI stick between televisions.',
-  },
 ];
 
 export default function FAQSection() {
