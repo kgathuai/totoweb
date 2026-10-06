@@ -128,34 +128,33 @@ docsLink: 'https://github.com/kgathuai/Evieit/tizen/README.md',
 
 ### Colors & Theme
 
-Edit the MUI theme in `components/ThemeRegistry.jsx`:
+The palette lives in `components/ThemeRegistry.jsx` and mirrors the Uni-Learn app
+theme (`totoLearn/app/theme.js`) so the site and the product stay in sync:
 
-```jsx
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#6366f1', // Indigo
-    },
-    secondary: {
-      main: '#ec4899', // Pink
-    },
-  },
-  // ... more theme options
-});
+```js
+export const brand = {
+  coral:  { main: '#ff6b6b', dark: '#e63946' }, // primary — matches the red logo
+  yellow: { main: '#ffd93d' },                  // secondary
+  mint:   { main: '#6bcf7f' },                  // success
+  orange: { main: '#ff9f1c' },                  // warning
+  teal:   { main: '#4ecdc4' },                  // info
+  ink:    '#2b1114',                            // dark text on bright surfaces
+};
 ```
+
+Light and dark themes are generated from those same tokens by `getDesignTokens(mode)`.
+Visitors switch with the toggle in the header; the choice is stored in `localStorage`
+and otherwise follows their OS preference.
+
+Type is [Nunito](https://fonts.google.com/specimen/Nunito), self-hosted at build time
+by `next/font` (see `app/fonts.js`), so the static export needs no font CDN.
 
 ### Logo and Text
 
-Edit `components/Header.jsx`:
-
-```jsx
-<Typography variant="h1">
-  📺 Uni-Learn
-</Typography>
-<Typography variant="h5">
-  Free, offline learning for your TV
-</Typography>
-```
+The logo is `public/totologo.png` — a transparent PNG (red TV, dark lettering), so it
+is placed on a light disc in the header and footer to stay legible in dark mode.
+Headlines and the hero mockup live in `components/HeroSection.jsx`; each section's
+title/subtitle comes from the shared `components/SectionHeading.jsx`.
 
 ### Platform Information
 

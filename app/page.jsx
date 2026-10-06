@@ -1,14 +1,6 @@
 'use client';
 
-import {
-  Box,
-  Container,
-  Typography,
-  Button,
-  Stack,
-  Grid,
-  Paper,
-} from '@mui/material';
+import { Box } from '@mui/material';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import PlatformsSection from '@/components/PlatformsSection';
@@ -19,7 +11,7 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <Box>
+    <Box id="top" component="main">
       <Header />
       <HeroSection />
       <PlatformsSection />

@@ -1,23 +1,41 @@
-'use client';
-
+import { nunito } from './fonts';
 import { ThemeRegistry } from '@/components/ThemeRegistry';
-import { Box, CssBaseline } from '@mui/material';
+
+export const metadata = {
+  title: 'Uni-Learn | Free Offline Educational App for TV',
+  description:
+    'Uni-Learn is a free, offline educational app for children aged 3-7: the alphabet, numbers to 100 and early logic games on Samsung Tizen, LG webOS, Android TV, or any TV over HDMI.',
+  applicationName: 'Uni-Learn',
+  keywords: [
+    'Uni-Learn',
+    'educational TV app',
+    'kids learning app',
+    'offline learning',
+    'Samsung Tizen',
+    'LG webOS',
+    'Android TV',
+  ],
+  openGraph: {
+    title: 'Uni-Learn | Free Offline Educational App for TV',
+    description: 'Free, offline learning for kids aged 3-7 on your TV. No internet, no subscriptions.',
+    type: 'website',
+  },
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#ff6b6b',
+};
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Uni-Learn - Free educational app for kids ages 3-7 on your TV" />
-        <title>Uni-Learn | Free Educational App for TV</title>
-      </head>
+    <html lang="en" className={nunito.variable}>
       <body>
         <ThemeRegistry>
-          <CssBaseline />
-          <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
             {children}
-          </Box>
+          </div>
         </ThemeRegistry>
       </body>
     </html>

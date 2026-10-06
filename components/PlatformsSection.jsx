@@ -1,137 +1,135 @@
 'use client';
 
-import { Box, Container, Typography, Grid, Card, CardContent, Button, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Container,
+  Grid,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from '@mui/material';
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+import TvRoundedIcon from '@mui/icons-material/TvRounded';
+import LiveTvRoundedIcon from '@mui/icons-material/LiveTvRounded';
+import AndroidRoundedIcon from '@mui/icons-material/AndroidRounded';
+import SettingsInputHdmiRoundedIcon from '@mui/icons-material/SettingsInputHdmiRounded';
+import SectionHeading from './SectionHeading';
+import { brand } from './ThemeRegistry';
 
 const platforms = [
   {
-    title: '🔷 Samsung TV',
-    model: '2016+ models',
-    color: '#16a34a',
-    description: 'Install directly on your Samsung Smart TV',
-    features: [
-      'No external device needed',
-      'Download and install once',
-      'Works completely offline',
-    ],
     id: 'tizen',
+    title: 'Samsung TV',
+    model: 'Tizen · 2016 and newer',
+    icon: TvRoundedIcon,
+    accent: brand.coral.main,
+    description: 'Install straight onto a Samsung Smart TV — no extra box, no cables.',
+    features: ['No extra device needed', 'Install once, keep forever', 'Runs entirely offline'],
   },
   {
-    title: '🔶 LG TV',
-    model: '2016+ models',
-    color: '#16a34a',
-    description: 'Install directly on your LG Smart TV',
-    features: [
-      'No external device needed',
-      'Download and install once',
-      'Works completely offline',
-    ],
     id: 'webos',
+    title: 'LG TV',
+    model: 'webOS · 2016 and newer',
+    icon: LiveTvRoundedIcon,
+    accent: brand.teal.main,
+    description: 'Install straight onto an LG Smart TV with the webOS developer tools.',
+    features: ['No extra device needed', 'Install once, keep forever', 'Runs entirely offline'],
   },
   {
-    title: '🟢 Android TV / Google TV',
-    model: 'Sony, TCL, Hisense, etc.',
-    color: '#16a34a',
-    description: 'For Android-based TVs and sticks',
-    features: [
-      'Works with Android TV sticks',
-      'Download app and install',
-      'Runs completely offline',
-    ],
     id: 'android',
+    title: 'Android TV & Google TV',
+    model: 'Sony, TCL, Hisense, Xiaomi',
+    icon: AndroidRoundedIcon,
+    accent: brand.mint.main,
+    description: 'For Android-based televisions and streaming sticks.',
+    features: ['Works with Google TV sticks', 'Sideload over USB or ADB', 'Runs entirely offline'],
   },
   {
-    title: '📦 Any TV (HDMI)',
-    model: 'Works with all TVs',
-    color: '#16a34a',
-    description: 'Use a small external device',
-    features: [
-      'Works with ANY TV (even old ones)',
-      'Most affordable option',
-      'Just plug in and play',
-    ],
     id: 'hdmi',
+    title: 'Any TV with HDMI',
+    model: 'Even older televisions',
+    icon: SettingsInputHdmiRoundedIcon,
+    accent: brand.orange.main,
+    description: 'Add a Raspberry Pi or Android stick to any screen with an HDMI port.',
+    features: ['Works with ANY TV', 'Most affordable option', 'Plug in and it starts'],
   },
 ];
 
 export default function PlatformsSection() {
   return (
-    <Box sx={{ py: 6, px: 2, backgroundColor: 'white' }}>
+    <Box
+      id="platforms"
+      component="section"
+      sx={{ py: { xs: 7, md: 10 }, px: 2, bgcolor: 'background.paper', scrollMarginTop: '92px' }}
+    >
       <Container maxWidth="lg">
-        <Typography
-          variant="h2"
-          sx={{
-            textAlign: 'center',
-            mb: 1,
-          }}
-        >
-          Choose Your TV Platform
-        </Typography>
-        <Typography
-          variant="body1"
-          sx={{
-            textAlign: 'center',
-            color: '#6b7280',
-            mb: 4,
-          }}
-        >
-          Select the option that matches your TV brand
-        </Typography>
+        <SectionHeading
+          eyebrow="Pick your setup"
+          title="Choose your TV platform"
+          subtitle="Uni-Learn runs on the televisions families already own — or on an affordable stick that turns any screen into one."
+        />
 
         <Grid container spacing={3}>
-          {platforms.map((platform) => (
-            <Grid item xs={12} sm={6} md={6} lg={3} key={platform.id}>
-              <Card
-                sx={{
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  overflow: 'hidden',
-                }}
-              >
-                <Box
-                  sx={{
-                    background: `linear-gradient(135deg, ${platform.color}, ${platform.color}dd)`,
-                    color: 'white',
-                    p: 2,
-                  }}
-                >
-                  <Typography variant="h5" sx={{ fontWeight: 600 }}>
-                    {platform.title}
-                  </Typography>
-                  <Typography variant="caption" sx={{ opacity: 0.9 }}>
-                    {platform.model}
-                  </Typography>
-                </Box>
-                <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography variant="body2" sx={{ mb: 2, color: '#6b7280' }}>
-                    {platform.description}
-                  </Typography>
-                  <List sx={{ p: 0 }}>
-                    {platform.features.map((feature, idx) => (
-                      <ListItem key={idx} sx={{ p: 0, mb: 1 }}>
-                        <ListItemIcon sx={{ minWidth: 24 }}>
-                          <CheckCircleIcon sx={{ fontSize: '1.2rem', color: '#16a34a' }} />
-                        </ListItemIcon>
-                        <ListItemText
-                          primary={feature}
-                          primaryTypographyProps={{ variant: 'body2' }}
-                        />
-                      </ListItem>
-                    ))}
-                  </List>
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 2 }}
-                    href={`#${platform.id}-install`}
+          {platforms.map((platform) => {
+            const Icon = platform.icon;
+            return (
+              <Grid item xs={12} sm={6} lg={3} key={platform.id}>
+                <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                  <CardContent
+                    sx={{ p: 3, display: 'flex', flexDirection: 'column', height: '100%' }}
                   >
-                    View Installation
-                  </Button>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
+                    <Box
+                      sx={{
+                        width: 52,
+                        height: 52,
+                        borderRadius: 2.5,
+                        display: 'grid',
+                        placeItems: 'center',
+                        bgcolor: `${platform.accent}22`,
+                        color: platform.accent,
+                        mb: 2,
+                      }}
+                    >
+                      <Icon sx={{ fontSize: 28 }} />
+                    </Box>
+
+                    <Typography variant="h5">{platform.title}</Typography>
+                    <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 700 }}>
+                      {platform.model}
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1.5, mb: 2 }}>
+                      {platform.description}
+                    </Typography>
+
+                    <List sx={{ p: 0, mb: 3 }}>
+                      {platform.features.map((feature) => (
+                        <ListItem key={feature} sx={{ p: 0, mb: 0.75 }} disableGutters>
+                          <ListItemIcon>
+                            <CheckCircleRoundedIcon sx={{ fontSize: 19, color: platform.accent }} />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={feature}
+                            primaryTypographyProps={{ variant: 'body2' }}
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+
+                    <Box sx={{ mt: 'auto' }}>
+                      <Button fullWidth variant="outlined" href={`#${platform.id}-install`}>
+                        View install guide
+                      </Button>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
+            );
+          })}
         </Grid>
       </Container>
     </Box>

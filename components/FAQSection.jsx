@@ -1,70 +1,74 @@
 'use client';
 
-import { Box, Container, Typography, Grid, Card, CardContent } from '@mui/material';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Container,
+  Typography,
+} from '@mui/material';
+import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
+import SectionHeading from './SectionHeading';
 
 const faqs = [
   {
     question: 'Do I need internet to use the app?',
-    answer: 'No. After you install the app once, it works completely offline. Perfect for areas with no or unreliable internet.',
+    answer:
+      'No. Once the app is installed it works completely offline — ideal for homes with no connection or an unreliable one.',
   },
   {
     question: 'Is there a monthly fee?',
-    answer: 'No. Uni-Learn is completely free. One-time installation, no subscriptions.',
+    answer: 'No. Uni-Learn is completely free. Install it once and there is nothing else to pay, ever.',
   },
   {
-    question: 'What age is this for?',
-    answer: 'Designed for kids ages 3-7. Includes alphabet learning, numbers up to 100, and interactive games.',
+    question: 'What ages is this for?',
+    answer:
+      'It is designed for children aged 3–7. It covers the alphabet, numbers up to 100, and early logic and recognition games.',
   },
   {
-    question: 'Which TV should I buy?',
-    answer: 'If you already own a TV, we support most brands. If you\'re buying, Android TV sticks are very affordable (~$25) and work with any TV.',
+    question: 'Which TV should I get?',
+    answer:
+      'If you already own a TV we support most brands. If you are buying, an Android TV stick is the cheapest route — around $25 — and works with any screen that has an HDMI port.',
   },
   {
     question: 'How much space does it need?',
-    answer: 'About 50-100MB on your device. Works on older, low-end TVs and devices.',
+    answer:
+      'Roughly 50–100 MB. It runs comfortably on older, low-powered TVs and devices.',
   },
   {
-    question: 'Can I use it on multiple TVs?',
-    answer: 'Yes. Install once on a device and move it between TVs using HDMI.',
+    question: 'Can I use it on more than one TV?',
+    answer:
+      'Yes. Install it on each device you want to use, or move a small HDMI stick between televisions.',
   },
 ];
 
 export default function FAQSection() {
   return (
-    <Box sx={{ py: 6, px: 2, backgroundColor: 'white' }}>
-      <Container maxWidth="lg">
-        <Typography
-          variant="h2"
-          sx={{
-            textAlign: 'center',
-            mb: 4,
-          }}
-        >
-          Frequently Asked Questions
-        </Typography>
+    <Box
+      id="faq"
+      component="section"
+      sx={{ py: { xs: 7, md: 10 }, px: 2, bgcolor: 'background.paper', scrollMarginTop: '92px' }}
+    >
+      <Container maxWidth="md">
+        <SectionHeading
+          eyebrow="Good to know"
+          title="Frequently asked questions"
+          subtitle="The things parents ask us most before installing."
+        />
 
-        <Grid container spacing={3}>
-          {faqs.map((faq, idx) => (
-            <Grid item xs={12} sm={6} md={4} key={idx}>
-              <Card
-                sx={{
-                  height: '100%',
-                  borderLeft: '3px solid #16a34a',
-                  backgroundColor: '#f9fafb',
-                }}
-              >
-                <CardContent>
-                  <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
-                    {faq.question}
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: '#6b7280', lineHeight: 1.6 }}>
-                    {faq.answer}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+        {faqs.map((faq) => (
+          <Accordion key={faq.question} sx={{ mb: 2 }}>
+            <AccordionSummary expandIcon={<ExpandMoreRoundedIcon />}>
+              <Typography variant="h5">{faq.question}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography variant="body1" sx={{ color: 'text.secondary' }}>
+                {faq.answer}
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+        ))}
       </Container>
     </Box>
   );
