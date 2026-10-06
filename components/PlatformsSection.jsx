@@ -43,7 +43,7 @@ const platforms = [
   {
     id: 'android',
     title: 'Android TV & Google TV',
-    model: 'Sony, TCL, Hisense, Xiaomi',
+    model: 'Vitron, Syinix, TCL, Hisense',
     icon: AndroidRoundedIcon,
     accent: brand.mint.main,
     description: 'For Android-based televisions and streaming sticks.',

@@ -54,13 +54,13 @@ const guides = [
   {
     id: 'android',
     title: 'Android TV & Google TV',
-    model: 'Sony, TCL, Hisense, Xiaomi',
+    model: 'Vitron, Syinix, TCL, Hisense, Sony',
     icon: AndroidRoundedIcon,
     accent: brand.mint.main,
     steps: [
-      { label: 'Build the APK', description: 'There is no prebuilt APK yet. Wrap the web export in a small WebView project — the Android TV guide walks through it.' },
+      { label: 'Download the app', description: 'Get UniLearnTV.apk (about 13 MB) from the download section below — every lesson is inside it, so it works with no internet at all.' },
       { label: 'Enable unknown sources', description: 'On the TV: Settings → Security → Unknown sources.' },
-      { label: 'Install over USB or ADB', description: 'Copy the APK to a USB drive, or run adb install -r app-release.apk.' },
+      { label: 'Install from the USB drive', description: 'Plug the drive into the TV and open UniLearnTV.apk, or run adb install -r UniLearnTV.apk.' },
       { label: 'Launch', description: 'Find "Uni-Learn" in your apps list and open it.' },
     ],
     docsLink: 'https://github.com/kgathuai/Evieit/blob/main/android-tv/README.md',
