@@ -4,7 +4,7 @@ import { Box, Typography } from '@mui/material';
 
 export default function SectionHeading({ eyebrow, title, subtitle }) {
   return (
-    <Box sx={{ textAlign: 'center', maxWidth: 720, mx: 'auto', mb: { xs: 4, md: 6 } }}>
+    <Box sx={{ textAlign: 'center', maxWidth: '45rem', mx: 'auto', mb: { xs: 4, md: 6 } }}>
       {eyebrow ? (
         <Typography
           variant="overline"

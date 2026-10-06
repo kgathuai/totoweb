@@ -3,14 +3,13 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { useTvMode } from '@/hooks/useTvMode';
+import { useTvNavigation } from '@/hooks/useTvNavigation';
 
 /**
  * Brand palette taken from the Uni-Learn app itself (totoLearn/app/theme.js) so
  * the landing page and the product share one visual language. The coral primary
  * also matches the red TV mark in public/totologo.png.
- *
- * The previous landing-page theme used a green (#16a34a) that appears nowhere in
- * the product, and set primary/secondary/success/warning all to that same colour.
  */
 export const brand = {
   coral: { main: '#ff6b6b', dark: '#e63946', light: '#ffa5a5', tint: '#ffe5e5' },
@@ -27,9 +26,24 @@ const ColorModeContext = createContext({ mode: 'light', toggleColorMode: () => {
 
 export const useColorMode = () => useContext(ColorModeContext);
 
-function getDesignTokens(mode) {
+/**
+ * Fluid type with a plain fallback. `clamp()` needs Chrome 79+, and plenty of
+ * smart-TV browsers (Tizen 2016-2019, older webOS) ship something older. So a
+ * rem size is declared first and only upgraded to the fluid value where it is
+ * supported. The fallback still scales on a TV, because TV mode raises the root
+ * font size rather than the individual type steps.
+ */
+const fluid = (fallback, min, preferred, max) => ({
+  fontSize: fallback,
+  '@supports (font-size: clamp(1rem, 1vw, 2rem))': {
+    fontSize: `clamp(${min}, ${preferred}, ${max})`,
+  },
+});
+
+function getDesignTokens(mode, tv) {
   const isDark = mode === 'dark';
   const divider = isDark ? 'rgba(255,255,255,0.12)' : 'rgba(43,17,20,0.10)';
+  const focusRing = `4px solid ${brand.coral.dark}`;
 
   return {
     palette: {
@@ -58,22 +72,29 @@ function getDesignTokens(mode) {
         : { primary: brand.ink, secondary: '#6d5658' },
       divider,
     },
-    shape: { borderRadius: 16 },
+    // Sizes below are in rem wherever they affect the UI's scale, so that
+    // raising the root font size on a TV grows the whole interface together.
+    spacing: tv ? 10 : 8,
+    shape: { borderRadius: tv ? 20 : 16 },
     typography: {
       fontFamily: 'var(--font-nunito), "Segoe UI", system-ui, -apple-system, sans-serif',
       h1: {
-        fontSize: 'clamp(2.25rem, 1.4rem + 3.4vw, 3.9rem)',
+        ...fluid('2.5rem', '2.25rem', '1.4rem + 3.4vw', '3.9rem'),
         fontWeight: 900,
         lineHeight: 1.05,
         letterSpacing: '-0.02em',
       },
       h2: {
-        fontSize: 'clamp(1.75rem, 1.2rem + 2.1vw, 2.75rem)',
+        ...fluid('2rem', '1.75rem', '1.2rem + 2.1vw', '2.75rem'),
         fontWeight: 900,
         lineHeight: 1.15,
         letterSpacing: '-0.015em',
       },
-      h3: { fontSize: 'clamp(1.3rem, 1.1rem + 1vw, 1.65rem)', fontWeight: 800, lineHeight: 1.25 },
+      h3: {
+        ...fluid('1.5rem', '1.3rem', '1.1rem + 1vw', '1.65rem'),
+        fontWeight: 800,
+        lineHeight: 1.25,
+      },
       h4: { fontSize: '1.2rem', fontWeight: 800, lineHeight: 1.3 },
       h5: { fontSize: '1.05rem', fontWeight: 800, lineHeight: 1.35 },
       h6: { fontSize: '0.98rem', fontWeight: 800, lineHeight: 1.4 },
@@ -86,22 +107,51 @@ function getDesignTokens(mode) {
     components: {
       MuiCssBaseline: {
         styleOverrides: {
-          html: { scrollBehavior: 'smooth', scrollPaddingTop: 92 },
+          html: {
+            // A TV is watched from roughly ten feet away, so the whole rem
+            // scale is raised rather than restyling every element.
+            fontSize: tv ? '20px' : '16px',
+            scrollBehavior: 'smooth',
+            scrollPaddingTop: tv ? '8rem' : '6rem',
+          },
           body: { WebkitFontSmoothing: 'antialiased', textRendering: 'optimizeLegibility' },
+          // :focus-visible is missing on older TV browsers (Chrome < 86), so TV
+          // mode also styles plain :focus — a remote user must always be able
+          // to see where they are.
+          'a:focus-visible, button:focus-visible, [tabindex]:focus-visible': {
+            outline: focusRing,
+            outlineOffset: 3,
+          },
+          ...(tv
+            ? {
+                'a:focus, button:focus, [tabindex]:focus': {
+                  outline: focusRing,
+                  outlineOffset: 3,
+                },
+              }
+            : {}),
         },
       },
       MuiPaper: { styleOverrides: { root: { backgroundImage: 'none' } } },
+      MuiContainer: {
+        styleOverrides: {
+          // Give TV layouts more of the 16:9 panel, while still leaving a wide
+          // margin so nothing important sits inside a TV's overscan crop.
+          ...(tv ? { maxWidthLg: { maxWidth: 1600 }, maxWidthMd: { maxWidth: 1200 } } : {}),
+        },
+      },
       MuiButton: {
         defaultProps: { disableElevation: true },
         styleOverrides: {
           root: {
             borderRadius: 999,
-            padding: '11px 24px',
-            minHeight: 46,
+            // rem, not px, so TV mode enlarges the tap target as well as the label.
+            padding: '0.6875rem 1.5rem',
+            minHeight: '2.875rem',
             fontWeight: 800,
-            '&:focus-visible': { outline: `3px solid ${brand.coral.dark}`, outlineOffset: 2 },
+            '&:focus-visible': { outline: focusRing, outlineOffset: 3 },
           },
-          sizeLarge: { padding: '15px 32px', minHeight: 56, fontSize: '1.0625rem' },
+          sizeLarge: { padding: '0.9375rem 2rem', minHeight: '3.5rem', fontSize: '1.0625rem' },
           containedPrimary: {
             backgroundColor: brand.coral.main,
             color: brand.ink,
@@ -147,9 +197,7 @@ function getDesignTokens(mode) {
           },
         },
       },
-      MuiAccordionSummary: {
-        styleOverrides: { root: { px: 2.5, py: 1.5 } },
-      },
+      MuiAccordionSummary: { styleOverrides: { root: { px: 2.5, py: 1.5 } } },
       MuiAccordionDetails: { styleOverrides: { root: { px: 2.5, pb: 3, pt: 0 } } },
       MuiChip: { styleOverrides: { root: { fontWeight: 800, borderRadius: 999 } } },
       MuiListItemIcon: { styleOverrides: { root: { minWidth: 30 } } },
@@ -159,6 +207,10 @@ function getDesignTokens(mode) {
 
 export function ThemeRegistry({ children }) {
   const [mode, setMode] = useState('light');
+  const isTv = useTvMode();
+
+  // Remote-friendly focus movement, only on televisions.
+  useTvNavigation(isTv);
 
   useEffect(() => {
     try {
@@ -190,7 +242,7 @@ export function ThemeRegistry({ children }) {
     [mode],
   );
 
-  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+  const theme = useMemo(() => createTheme(getDesignTokens(mode, isTv)), [mode, isTv]);
 
   return (
     <ColorModeContext.Provider value={colorMode}>

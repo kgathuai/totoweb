@@ -178,6 +178,37 @@ The site is fully responsive and optimized for:
 
 All MUI components are responsive using `sx` prop with breakpoints.
 
+## TV Screens
+
+Uni-Learn is a TV product, and the Android TV guide suggests opening this site in a
+TV browser — so the page adapts to televisions too.
+
+`hooks/useTvMode.js` detects a TV from the user agent (Tizen, webOS, NetCast, BRAVIA,
+GoogleTV, Android TV, AppleTV, Roku, …) or, for platforms it cannot identify, from a
+large viewport with no pointer and no hover. Desktop user agents are excluded
+explicitly, because in TV mode the arrow keys move focus instead of scrolling — a
+desktop misfire would break the page.
+
+When TV mode is on:
+
+- the root font size rises from `16px` to `20px`. Every size in
+  `components/ThemeRegistry.jsx` is expressed in `rem`, so type, button padding and
+  tap targets grow together — a 78px `h1` and 21px buttons at 1080p
+- containers widen to 1600px, leaving a wide margin so nothing important lands in a
+  TV's overscan crop, plus extra top and bottom padding for the same reason
+- `hooks/useTvNavigation.js` adds D-pad navigation: the arrow keys move focus to the
+  nearest focusable element and scroll it into view rather than only scrolling. When
+  there is nothing further in that direction the key is left alone, so the page still
+  scrolls normally
+- focus rings use plain `:focus` as well as `:focus-visible`, because older TV
+  browsers (Chrome < 86) do not support `:focus-visible`
+
+Fluid `clamp()` type needs Chrome 79+, so each type step declares a plain `rem`
+fallback first and only upgrades where `clamp()` is supported.
+
+To preview the TV layout on any machine, append `?tv=1` to the URL. `?tv=0` forces it
+off.
+
 ## SEO & Meta Tags
 
 Edit `app/layout.jsx` to update meta tags:

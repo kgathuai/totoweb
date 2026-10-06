@@ -86,7 +86,7 @@ export default function InstallationGuides() {
     <Box
       id="install"
       component="section"
-      sx={{ py: { xs: 7, md: 10 }, px: 2, scrollMarginTop: '92px' }}
+      sx={{ py: { xs: 7, md: 10 }, px: 2, scrollMarginTop: '6rem' }}
     >
       <Container maxWidth="md">
         <SectionHeading
@@ -102,7 +102,7 @@ export default function InstallationGuides() {
               key={guide.id}
               id={`${guide.id}-install`}
               defaultExpanded={index === 0}
-              sx={{ mb: 2, scrollMarginTop: '92px' }}
+              sx={{ mb: 2, scrollMarginTop: '6rem' }}
             >
               <AccordionSummary expandIcon={<ExpandMoreRoundedIcon />}>
                 <Box

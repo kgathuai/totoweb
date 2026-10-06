@@ -24,7 +24,7 @@ const promises = [
 /** A CSS-drawn TV showing a lesson, so the hero needs no screenshot assets. */
 function TvMockup() {
   return (
-    <Box sx={{ position: 'relative', width: '100%', maxWidth: 540, mx: 'auto' }}>
+    <Box sx={{ position: 'relative', width: '100%', maxWidth: '33.75rem', mx: 'auto' }}>
       <Box
         aria-hidden
         sx={{
@@ -178,7 +178,7 @@ export default function HeroSection() {
               </Box>
             </Typography>
 
-            <Typography variant="subtitle1" sx={{ color: 'text.secondary', mb: 3.5, maxWidth: 560 }}>
+            <Typography variant="subtitle1" sx={{ color: 'text.secondary', mb: 3.5, maxWidth: '35rem' }}>
               Uni-Learn teaches the alphabet, numbers to 100 and early logic games to children aged
               3–7 — entirely offline, on the television you already own, with the remote they
               already know.

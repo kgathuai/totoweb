@@ -8,10 +8,23 @@ import InstallationGuides from '@/components/InstallationGuides';
 import FAQSection from '@/components/FAQSection';
 import DownloadSection from '@/components/DownloadSection';
 import Footer from '@/components/Footer';
+import { useTvMode } from '@/hooks/useTvMode';
 
 export default function Home() {
+  const isTv = useTvMode();
+
   return (
-    <Box id="top" component="main">
+    <Box
+      id="top"
+      component="main"
+      sx={{
+        // Televisions often crop a few percent off the top and bottom
+        // (overscan). Horizontal breathing room comes from the widened
+        // TV containers instead, so section backgrounds stay full-bleed.
+        pt: isTv ? 1.5 : 0,
+        pb: isTv ? 1.5 : 0,
+      }}
+    >
       <Header />
       <HeroSection />
       <PlatformsSection />

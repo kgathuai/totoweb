@@ -48,7 +48,7 @@ export default function FAQSection() {
     <Box
       id="faq"
       component="section"
-      sx={{ py: { xs: 7, md: 10 }, px: 2, bgcolor: 'background.paper', scrollMarginTop: '92px' }}
+      sx={{ py: { xs: 7, md: 10 }, px: 2, bgcolor: 'background.paper', scrollMarginTop: '6rem' }}
     >
       <Container maxWidth="md">
         <SectionHeading

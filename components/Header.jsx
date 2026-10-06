@@ -26,7 +26,7 @@ export default function Header() {
       }}
     >
       <Container maxWidth="lg">
-        <Toolbar disableGutters sx={{ gap: 1.5, minHeight: { xs: 64, md: 76 } }}>
+        <Toolbar disableGutters sx={{ gap: 1.5, minHeight: { xs: '4rem', md: '4.75rem' } }}>
           <Stack
             component="a"
             href="#top"

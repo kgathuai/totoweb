@@ -37,7 +37,7 @@ export default function DownloadSection() {
     <Box
       id="download"
       component="section"
-      sx={{ py: { xs: 7, md: 10 }, px: 2, scrollMarginTop: '92px' }}
+      sx={{ py: { xs: 7, md: 10 }, px: 2, scrollMarginTop: '6rem' }}
     >
       <Container maxWidth="lg">
         <SectionHeading
@@ -72,7 +72,7 @@ export default function DownloadSection() {
                 <Typography variant="h4" sx={{ mt: 0.5 }}>
                   Samsung Tizen package (.wgt)
                 </Typography>
-                <Typography variant="body2" sx={{ mt: 1, maxWidth: 560, fontWeight: 600 }}>
+                <Typography variant="body2" sx={{ mt: 1, maxWidth: '35rem', fontWeight: 600 }}>
                   This build is unsigned — retail Samsung TVs will not accept it until you sign it
                   with Tizen Studio. Step-by-step instructions are in the Tizen guide above.
                 </Typography>
